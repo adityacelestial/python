@@ -231,3 +231,63 @@ print(aditya1)
 
 aditya.update(aditya1)
 print(aditya)
+
+# How do you create a set? 
+
+s1=set()
+
+# How do you add elements to a set? 
+
+for i in range(10):
+    s1.add(i)
+s1.add(1)
+print(s1)
+
+# How do you remove elements from a set? 
+
+s1.remove(2)
+print(s1)
+
+# How do you perform union, intersection, and difference? 
+
+s2=set()
+for i in range(4,15):
+    s2.add(i)
+
+print(s2)
+
+print(s1.union(s2))
+print(s1.intersection(s2))
+print(s1.difference(s2))
+
+
+
+# How do you check multiple conditions? 
+
+age=18
+if age>=18:
+    print('major')
+elif age>=15 and age<18:
+    print('race to major')
+else:
+    print("minor")
+# How do you combine conditions using logical operators? 
+
+# How do you implement nested conditions? 
+
+
+user_exists = True
+password_correct = True
+account_active = False
+
+if(user_exists):
+    if(account_active):
+        if(password_correct):
+            print('login success')
+        else:
+            print('unsuccessful')
+    else:
+        print("Account deactivated")
+else:
+    print("user does not exist")
+    
