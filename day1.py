@@ -351,10 +351,33 @@ print(variablesum(1,2,3,4))
 print(variablesum(1,2,3,3,4,5,6))
 
 # How do you create a lambda function? 
-
+add=lambda a,b:a+b
+print(add(5,9))
 
 # How do you use lambda with map? 
 
 # How do you use lambda with filter? 
 
-# How do you use lambda with sorted? 
+# How do you uselambda with sorted?  
+
+
+add=lambda a,b:a+b
+print(add(5,4))
+
+
+# map function on the lambda function
+# map(function,iterable)
+# map is something that will pump the values into the lanmbda function
+l=[1,2,3,4]
+outputs= map(lambda x:x*2,l)
+print(list(outputs))
+
+# outputs is a map object
+
+# map option in filter
+
+# filter the outputs according to the expression
+l=[1,2,3,4,5]
+outputs=filter(lambda a:a%2==0,l)
+print(list(outputs))
+
