@@ -290,4 +290,71 @@ if(user_exists):
         print("Account deactivated")
 else:
     print("user does not exist")
-    
+
+
+
+
+# How do you iterate over a list? 
+
+for i in nums:
+    print(i)
+
+# How do you iterate over dictionary keys and values? 
+
+for (key,value) in aditya.items():
+    print(key,value)
+
+# How do you break a loop? 
+
+n=[i for i in range(11)]
+for i in n:
+    if i==7:
+        break
+    print(i)
+
+# What does continue do? 
+# Ans:
+
+    # continue will skip that iteration when given condition was met
+
+print("\n\n Functions")
+# How do you define a function? 
+
+def square_of_num(n):
+    return n**2
+
+print(square_of_num(2))
+print(square_of_num(3))
+# What are positional arguments? 
+
+def positional(first_name,last_name,company='celestial'):
+    print(f"HEllo {first_name}.{last_name} from {company}")
+positional('Aditya','v','celes')
+# What are keyword arguments? 
+
+positional(last_name='v',first_name='ADitya',company='cel')
+
+# What are default parameters? 
+
+positional('aditya','v')
+
+# What are variable length arguments? 
+# /it will take variable length arguments 
+# that will take all variables as input and do operatoins
+
+def variablesum(*args):
+    #here args is a tuple
+    return sum(args)
+
+print(variablesum(1,2,3,4))
+
+print(variablesum(1,2,3,3,4,5,6))
+
+# How do you create a lambda function? 
+
+
+# How do you use lambda with map? 
+
+# How do you use lambda with filter? 
+
+# How do you use lambda with sorted? 
