@@ -183,3 +183,51 @@ nums.sort()
 print(nums)
 nums.reverse()
 print(nums)
+
+# How do you remove duplicates from a list? 
+
+nums.append(3)
+s=set(nums)
+nums=list(s)
+print(nums)
+# How do you find the largest number in a list? 
+
+largest=max(nums)
+print(max(nums))
+
+# How do you reverse a list? 
+nums.reverse()
+
+
+# How do you create a dictionary? 
+
+aditya={}
+
+# How do you add new key value pairs? 
+aditya['name']='Aditya Sai'
+print(aditya)
+
+# How do you access dictionary values? 
+
+print(aditya['name'])
+
+aditya['age']=20
+
+print(aditya)
+
+# How do you iterate through a dictionary? 
+
+for (key,value) in aditya.items():
+    print(key)
+
+
+# How do you merge dictionaries? 
+
+aditya1={
+    'uni':'VIT university'
+}
+
+print(aditya1)
+
+aditya.update(aditya1)
+print(aditya)
