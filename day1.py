@@ -381,3 +381,25 @@ l=[1,2,3,4,5]
 outputs=filter(lambda a:a%2==0,l)
 print(list(outputs))
 
+nums=[-5,2,-1,7]
+sorted_nums=sorted(nums,key=lambda a:abs(a))
+
+sorted_nums=sorted(nums,key=lambda x:abs(x))
+print(sorted_nums)
+
+sample_strings=['Adithya','sai','vidivada']
+sorted_str=sorted(sample_strings,key=lambda a:len(a))
+
+print(list(sorted_str))
+
+# we can order a dictionary witht the lambda function
+
+
+students = [
+    {"name": "Adithya", "age": 23},
+    {"name": "Sai", "age": 21},
+    {"name": "Bob", "age": 25}
+]
+
+sorted_dict=sorted(students,key=lambda a:a['age'])
+print(list(sorted_dict))
