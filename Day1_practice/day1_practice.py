@@ -403,3 +403,237 @@ students = [
 
 sorted_dict=sorted(students,key=lambda a:a['age'])
 print(list(sorted_dict))
+
+
+# File handling
+
+# error handling
+
+num1=10 
+num2=4
+
+try:
+    output=num1/num2
+except ZeroDivisionError as e:
+    print(e)
+else:
+    print("No exception occured")
+finally:
+    print("Execution completed")
+
+
+
+
+class LowSalaryError(Exception):
+    def __init__(self,message="lowsalary"):
+        
+        super().__init__(message)
+
+salary=10000
+
+try:
+    if(salary>10000):
+        print("Good Salary")
+    else:
+        raise LowSalaryError()
+except LowSalaryError as e:
+    print(e)
+
+# File handling
+try:
+    
+    create=open("create.txt",'x')
+    create.close()
+except:
+    print("File already exist")
+# create the file using python
+
+# write into the file 
+
+# note this will erase the existing contents
+
+createwrite=open("create.txt",'w')
+
+createwrite.write("Sample text")
+createwrite.close()
+
+createappend=open('create.txt','a')
+for i in range(10):
+    createappend.write(f"sample text {i}\n")
+createappend.close()
+
+# 14. JSON 
+
+# Concept Questions 
+
+# What is JSON? 
+
+# Why is JSON widely used in APIs? 
+
+# What is the difference between JSON and dictionaries? 
+
+# Coding Questions 
+
+# How do you convert Python objects to JSON? 
+
+# How do you parse JSON into Python objects? 
+
+# Scenario Questions 
+
+# Why is JSON validation important in APIs? 
+
+import json
+
+import json
+
+data = [
+    {"id": 1, "name": "Alice"},
+    {"id": 2, "name": "Bob"}
+]
+
+with open("data.json", "w") as f:
+    json.dump(data, f, indent=4)
+
+
+data = {
+    "user1": {"id": 1, "name": "Alice"},
+    "user2": {"id": 2, "name": "Bob"}
+}
+
+with open("users.json", "w") as f:
+    json.dump(data, f, indent=4)
+
+#oops
+
+class Person:
+    pass
+
+p1=Person()
+print(p1)
+
+# constructor
+
+class Person:
+    species='Homo Sepiens'
+    def __init__(self,name,age):
+        self.name=name
+        self.age=age
+        self.__education='VIT'
+    def greet(self):
+        print(f"Hello {self.name}")
+    @classmethod
+    def editsapiens(cls):
+        cls.species='Humans'
+    @staticmethod
+    def squaremethod(x):
+        return x**2
+    @staticmethod
+    def info():
+        print("This is a person class")
+# two types of variables
+# 1.object variables (self.variable_name)
+# 2.class variable
+
+p1=Person('aditya',22)
+print(p1.name)
+print(p1.age)
+
+p1.greet()
+
+# class method was used to change the class variables
+# static methods do not access the class or object variables but act like a normal function
+p1.editsapiens()
+print(p1.species)
+
+print(p1.squaremethod(10))
+p1.info()
+
+# self.name public variables
+# self._name protected variable
+# self.__name private variable
+
+
+# print(p1.__education) private variable
+
+
+# Inheritance
+# this will allow the child class to access the variables and methods
+
+class Parent:
+    def __init__(self):
+        print("This is a parent class")
+        
+    def show(self):
+        print("This is a parent class")
+class Child(Parent):
+    def __init__(self):
+        super().__init__()
+    pass
+
+
+child1=Child()
+child1.show()
+
+# single inheritance
+# Only one class was inherited to another
+
+# multiple inheritance
+# a class could get inheritance from many classes
+
+# multilevel 
+#inheritance will pass from one class to another across multiple classes
+
+# hierarchial 
+# many child inheritances would get inheritance from single parent
+
+
+
+# datetime 
+
+from datetime import datetime,timedelta
+
+# time noew
+print(datetime.now())
+timenow=datetime.now()
+
+print(timenow)
+
+startdate=datetime(2026,3,19,18,43,10)
+print(startdate)
+
+expirydate=startdate+timedelta(days=30)
+print(expirydate)
+
+if(expirydate<datetime.now()):
+    print("expired")
+    
+sampledate=datetime(2025,3,19,18,45,00)
+if(sampledate<datetime.now()):
+    print("expired")
+
+
+# Abstraction
+
+# it is the hiding the implementation of a process 
+# abc module (Abstraction Base Class) was used 
+
+from abc import ABC,abstractmethod
+
+class Payment(ABC):
+    
+    @abstractmethod
+    def pay(self,amount):
+        pass
+#  payment is just a blue print we cannot make an object out of it
+
+class card(Payment):
+    def pay(self,amount):
+        print(f"The amount {amount} was paid using card")
+
+class upi(Payment):
+    def pay(self,amount):
+        print(f"The amount {amount} was paid using UPI")
+
+payment=upi()
+payment.pay(1000)
+

@@ -1,0 +1,9 @@
+2026-03-20 09:32:20 - INFO - User 'Aditya' registered successfully
+2026-03-20 09:32:28 - INFO - User 'Srinvasarao' registered successfully
+2026-03-20 09:32:48 - INFO - User list accessed
+2026-03-20 09:32:55 - INFO - User 'Aditya' deleted successfully
+2026-03-20 09:33:02 - INFO - User 'Srinivas' registered successfully
+2026-03-20 09:33:08 - INFO - User 'Aditya' registered successfully
+2026-03-20 09:33:27 - INFO - User list accessed
+2026-03-20 09:33:36 - ERROR - Attempt to delete non-existing user 'Srnivas'
+2026-03-20 09:33:45 - WARNING - Duplicate registration attempt for 'Aditya'
