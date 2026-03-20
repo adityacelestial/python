@@ -549,6 +549,24 @@ acc.get_balence()
 
 # LSP is followed 
 
+class Bird:
+    def eat(self):
+        print("Eating...")
+
+
+class FlyingBird(Bird):
+    def fly(self):
+        print("Flying...")
+
+
+class Sparrow(FlyingBird):
+    pass
+
+
+class Penguin(Bird):
+    def swim(self):
+        print("Swimming...")
+
 
 
 
