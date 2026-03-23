@@ -571,7 +571,7 @@ class Penguin(Bird):
 
 
 
-
+#Q20
 # E-Commerce Checkout System (ALL SOLID + OOP) 
 
 # Problem 
@@ -629,8 +629,10 @@ class Payment(ABC):
     def pay(self,amount):
         pass
 class Discount(ABC):
+    @abstractmethod
     def apply(self,amount):
         pass
+
 class Logger(ABC):
     def log(self,message):
         pass
@@ -664,11 +666,11 @@ class Checkout:
         self.discount=discount
         self.logger=logger
     
-    def process(self,amount):
-        self.payment.pay(amount)
-        amountpaid=self.discount.apply(amount)
+    def process(me,amount):
+        me.payment.pay(amount)
+        amountpaid=me.discount.apply(amount)
         print(amountpaid)
-        self.logger.log(self.payment.type,amountpaid)
+        me.logger.log(me.payment.type,amountpaid)
         
 checkout=Checkout(payment=Upi(),discount=FestivalOffer(),logger=PaymentLogger())
 checkout.process(1000)
