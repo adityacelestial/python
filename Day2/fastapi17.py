@@ -1,3 +1,45 @@
+
+# Q17. API Testing with pytest 
+
+# Topics: Testing, pytest, TestClient 
+
+# Problem Statement: 
+
+# Write automated tests for the Task API using pytest and FastAPI's TestClient. Cover: successful creation, listing, fetching by ID, updating, deleting, 404 for missing task, and validation error for bad payload. 
+
+# Input: 
+
+# # Test functions: 
+
+# test_health_check() 
+
+# test_create_task() 
+
+# test_create_task_invalid_status() 
+
+# test_get_tasks() 
+
+# test_get_task_not_found() 
+
+# test_update_task() 
+
+# test_delete_task() 
+
+# Output: 
+
+# # Terminal output: 
+
+# 7 passed in 0.45s 
+
+# Constraints: 
+
+# Use from fastapi.testclient import TestClient 
+
+# Test both success (2xx) and failure (4xx) cases 
+
+# Assert response status codes AND response body content 
+
+# Minimum 7 test cases 
 import pytest
 from fastapi.testclient import TestClient
 from main import app  # adjust import if your app is in a different file
