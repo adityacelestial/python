@@ -1,13 +1,7 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
+import os
+from dotenv import load_dotenv
 
-class Settings(BaseSettings):
-    APP_NAME: str = "Task Manager API"
-    LOG_FILE: str = "logs/app.log"
-    TASK_FILE: str = "data/tasks.json"
-    USER_FILE: str = "data/users.json"
+load_dotenv()
 
-    model_config = SettingsConfigDict(
-        extra="ignore"   
-    )
-
-settings = Settings()
+DATA_PATH = os.getenv("DATA_PATH", "./data")
+LOG_FILE = os.getenv("LOG_FILE", "./logs/app.log")

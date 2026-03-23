@@ -1,18 +1,21 @@
 from abc import ABC, abstractmethod
-from typing import List, Dict
 
 class BaseRepository(ABC):
 
     @abstractmethod
-    def get_all(self) -> List[Dict]:
+    def get_all(self):
         pass
 
     @abstractmethod
-    def save(self, data: Dict):
+    def get_by_id(self, item_id: int):
         pass
 
     @abstractmethod
-    def find_by_id(self, item_id: int) -> Dict:
+    def create(self, data: dict):
+        pass
+
+    @abstractmethod
+    def update(self, item_id: int, data: dict):
         pass
 
     @abstractmethod

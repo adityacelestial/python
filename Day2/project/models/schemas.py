@@ -1,9 +1,8 @@
 from pydantic import BaseModel, EmailStr, Field
-from datetime import datetime
 from typing import Optional
-from .enums import TaskStatus, TaskPriority
+from datetime import datetime
+from .enums import TaskPriority, TaskStatus
 
-# -------- USER --------
 class UserCreate(BaseModel):
     username: str = Field(min_length=3, max_length=30)
     email: EmailStr
@@ -16,26 +15,25 @@ class UserLogin(BaseModel):
 class UserResponse(BaseModel):
     id: int
     username: str
-    email: EmailStr
+    email: str
     created_at: datetime
 
-# -------- TASK --------
+
 class TaskCreate(BaseModel):
     title: str = Field(min_length=3, max_length=100)
-    description: Optional[str] = Field(default=None, max_length=500)
+    description: Optional[str] = Field(default="", max_length=500)
     priority: TaskPriority
-    status: TaskStatus = TaskStatus.pending
 
 class TaskUpdate(BaseModel):
     title: Optional[str]
     description: Optional[str]
-    priority: Optional[TaskPriority]
     status: Optional[TaskStatus]
+    priority: Optional[TaskPriority]
 
 class TaskResponse(BaseModel):
     id: int
     title: str
-    description: Optional[str]
+    description: str
     status: TaskStatus
     priority: TaskPriority
     owner: str

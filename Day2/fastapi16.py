@@ -37,31 +37,25 @@
 from fastapi import FastAPI
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-# ✅ Settings class
 class Settings(BaseSettings):
     APP_NAME: str
     DEBUG: bool
     JSON_DB_PATH: str
     LOG_LEVEL: str
-
-    # Load from .env file
     model_config = SettingsConfigDict(env_file=".env")
 
 
-# ✅ Singleton instance
+
 settings = Settings()
 
-# ✅ FastAPI app
 app = FastAPI()
 
 
-# ✅ Startup event
 @app.on_event("startup")
 def startup_event():
     print(f"App: {settings.APP_NAME} | Debug: {settings.DEBUG} | DB: {settings.JSON_DB_PATH}")
 
 
-# Sample route
 @app.get("/")
 def read_root():
     return {"message": "App is running"}

@@ -1,0 +1,9 @@
+2026-32-03/23/26 14:32:17 Request: GET URL:http://127.0.0.1:8000/tasks Responsecode:404
+2026-32-03/23/26 14:32:27 Request: PUT URL:http://127.0.0.1:8000/tasks Responsecode:404
+2026-45-03/23/26 14:45:33 Request: PUT URL:http://127.0.0.1:8000/tasks Responsecode:404
+2026-46-03/23/26 14:46:27 Request: GET URL:http://127.0.0.1:8000/ Responsecode:404
+2026-46-03/23/26 14:46:27 Request: PUT URL:http://127.0.0.1:8000/tasks/1 Responsecode:404
+2026-46-03/23/26 14:46:27 Request: PUT URL:http://127.0.0.1:8000/tasks Responsecode:404
+2026-46-03/23/26 14:46:27 Request: GET URL:http://127.0.0.1:8000/tasks/1 Responsecode:404
+2026-46-03/23/26 14:46:27 Request: GET URL:http://127.0.0.1:8000/docs Responsecode:200
+2026-46-03/23/26 14:46:27 Request: GET URL:http://127.0.0.1:8000/openapi.json Responsecode:200

@@ -155,7 +155,7 @@ customer.display_profile()
 
 # items = [OrderItem("Book", 2, 500), OrderItem("Pen", 5, 100)] 
 
-# order = Order(addr, pay, items) 
+# o = Order(addr, pay, items) rder
 
 # order.order_summary() 
 
@@ -275,7 +275,6 @@ class UserStorage:
 class UserNotifier:
     def __init__(self,dict):
         self.dict=dict
-        
         print(f"Email sent to {self.dict['email']}")
         
 class register_user:
@@ -403,8 +402,8 @@ class UserService:
         
 repo = Jsonmemory() 
 service = UserService(repo) 
-service.save({"username": "alice", "email": "a@b.com"}) 
-print(service.find("alice")) 
+service.save({"username": "adityasai", "email": "aditya@b.com"}) 
+print(service.find("adityasai")) 
 
 # Q8. Thread vs Sequential — IO Simulation 
 
@@ -715,7 +714,8 @@ print(UserResponse(**user.model_dump()))
 
 # Problem Statement: 
 
-# Create a FastAPI application with the following endpoints for a Task resource (store tasks in a Python list in memory): 
+# Create a FastAPI application with the following endpoints for a 
+# Task resource (store tasks in a Python list in memory): 
 
 # GET /health — returns {"status": "healthy"} 
 
