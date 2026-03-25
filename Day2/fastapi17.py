@@ -5,7 +5,9 @@
 
 # Problem Statement: 
 
-# Write automated tests for the Task API using pytest and FastAPI's TestClient. Cover: successful creation, listing, fetching by ID, updating, deleting, 404 for missing task, and validation error for bad payload. 
+# Write automated tests for the Task API using pytest and FastAPI's TestClient. 
+# Cover: successful creation, listing, fetching by ID, updating, deleting, 404 for missing task,
+# and validation error for bad payload. 
 
 # Input: 
 
@@ -131,3 +133,18 @@ def test_delete_task():
     # Verify deletion
     get_response = client.get(f"/tasks/{task_id}")
     assert get_response.status_code == 404
+    
+
+test_health_check() 
+
+test_create_task() 
+
+test_create_task_invalid_status() 
+
+test_get_tasks() 
+
+test_get_task_not_found() 
+
+test_update_task() 
+
+test_delete_task() 
