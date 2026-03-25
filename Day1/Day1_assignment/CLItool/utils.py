@@ -63,3 +63,29 @@ def delete_user(username):
 
     print("User deleted successfully")
     log_message("INFO", f"User '{username}' deleted successfully")
+
+import json
+import os
+
+USER_FILE = "users.json"
+
+def get_all_users():
+    if not os.path.exists(USER_FILE):
+        return []
+
+    with open(USER_FILE, "r") as f:
+        return json.load(f)
+
+import json
+import os
+
+USER_FILE = "users.json"
+
+def user_exists(username):
+    if not os.path.exists(USER_FILE):
+        return False
+
+    with open(USER_FILE, "r") as f:
+        users = json.load(f)
+
+    return username in users

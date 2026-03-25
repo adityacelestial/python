@@ -1,65 +1,89 @@
-from utils import register_user, login_user, view_users, delete_user
+from utils import register_user, login_user, view_users, delete_user, user_exists
 from logger import log_message
 
-MENU = """
-1. Register User
-2. Login
-3. View Users
-4. Delete User
-5. Exit
+FULL_MENU = """
+1. Login
+2. View Users
+3. Delete User
+4. Exit
+"""
+
+REGISTER_MENU = """
+1. Register
+2. Exit
 """
 
 
 def main():
-    while True:
-        print(MENU)
+    username = input("Enter username: ").strip()
 
-        try:
-            option = int(input("Enter option: "))
-        except ValueError:
-            print("Invalid input")
-            continue
+    if not user_exists(username):
+        print("User does not exist.")
+        
+        while True:
+            print(REGISTER_MENU)
 
-        if option == 1:
-            username = input("Enter username: ").strip()
-            password = input("Enter password: ").strip()
-            register_user(username, password)
+            try:
+                option = int(input("Enter option: "))
+            except ValueError:
+                print("Invalid input")
+                continue
 
-        elif option == 2:
-            attempts = 0
-            while attempts < 3:
-                username = input("Enter username: ")
-                password = input("Enter password: ")
+            if option == 1:
+                password = input("Enter password: ").strip()
+                register_user(username, password)
+                print("User registered successfully")
+                break
 
-                if login_user(username, password):
-                    print("Login successful")
-                    break
-                else:
-                    attempts += 1
-                    print("Login failed")
+            elif option == 2:
+                print("Exiting...")
+                return
 
-                    if attempts < 3:
-                        log_message("WARNING", f"Failed login attempt {attempts} for '{username}'")
-                    else:
-                        log_message("ERROR", f"Account locked for '{username}' after 3 attempts")
-                        print("Account locked")
-
-        elif option == 3:
-            view_users()
-
-        elif option == 4:
-            username = input("Enter username to delete: ").strip()
-            if username:
-                delete_user(username)
             else:
-                print("Username cannot be empty")
+                print("Invalid option")
 
-        elif option == 5:
-            print("Exiting...")
-            break
+    else:
+        print(f"Welcome back, {username}!")
 
-        else:
-            print("Invalid option")
+        while True:
+            print(FULL_MENU)
+
+            try:
+                option = int(input("Enter option: "))
+            except ValueError:
+                print("Invalid input")
+                continue
+
+            if option == 1:
+                attempts = 0
+                while attempts < 3:
+                    password = input("Enter password: ")
+
+                    if login_user(username, password):
+                        print("Login successful")
+                        break
+                    else:
+                        attempts += 1
+                        print("Login failed")
+
+                        if attempts < 3:
+                            log_message("WARNING", f"Failed login attempt {attempts} for '{username}'")
+                        else:
+                            log_message("ERROR", f"Account locked for '{username}' after 3 attempts")
+                            print("Account locked")
+
+            elif option == 2:
+                view_users()
+
+            elif option == 3:
+                delete_user(username)
+
+            elif option == 4:
+                print("Exiting...")
+                break
+
+            else:
+                print("Invalid option")
 
 
 if __name__ == "__main__":

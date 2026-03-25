@@ -1,0 +1,4 @@
+2026-03-25 09:13:54 - WARNING - users.json not found. Creating new file.
+2026-03-25 09:13:54 - INFO - User 'aditya' registered successfully
+2026-03-25 09:15:56 - INFO - User 'Srinivas' registered successfully
+2026-03-25 09:17:01 - WARNING - Duplicate registration attempt for 'Srinivas'
