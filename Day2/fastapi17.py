@@ -44,7 +44,7 @@
 # Minimum 7 test cases 
 import pytest
 from fastapi.testclient import TestClient
-from main import app  # adjust import if your app is in a different file
+from main import app  
 
 client = TestClient(app)
 
@@ -74,7 +74,7 @@ def test_create_task():
 def test_create_task_invalid_status():
     payload = {
         "title": "Invalid task",
-        "status": "in-progress"  # invalid enum value
+        "status": "in-progress"  
     }
 
     response = client.post("/tasks", json=payload)

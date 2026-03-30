@@ -15,7 +15,6 @@ def log_notification(title: str, owner: str):
         f.write(f"[{datetime.utcnow()}] Task '{title}' created by {owner} — notification sent\n")
 
 
-# ✅ Dependency injection (DB instead of JSON file)
 def get_service(db: Session = Depends(get_db)):
     repo = SQLAlchemyRepository(db)
     return TaskService(repo)
@@ -28,8 +27,6 @@ def create(
     service: TaskService = Depends(get_service)
 ):
     new_task = service.create(task, owner="alice")
-
-    # ✅ Background logging
     background_tasks.add_task(
         log_notification,
         task.title,

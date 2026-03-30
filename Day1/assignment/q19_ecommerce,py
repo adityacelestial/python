@@ -1,0 +1,138 @@
+#Q20
+# E-Commerce Checkout System (ALL SOLID + OOP) 
+
+# Problem 
+
+# Design checkout system with: 
+
+# Multiple payment methods (UPI, Card) 
+
+# Discount system (Festival, Premium user) 
+
+# Logging 
+
+
+# Input 
+
+# checkout = Checkout(payment=UPI(), discount=FestivalDiscount()) 
+# checkout.process(1000) 
+
+ 
+
+# Output 
+
+# Final Amount: 900 
+# Payment Successful via UPI 
+ 
+
+# Requirements 
+
+# Plug-and-play: 
+
+# Add new payment methods 
+
+# Add new discount strategies 
+
+
+# Constraints 
+
+# Must follow: 
+
+# SRP → separate classes 
+
+# OCP → extend without modifying 
+
+# LSP → interchangeable behaviors 
+
+# ISP → small interfaces 
+
+# DIP → depend on abstraction 
+
+
+from abc import ABC,abstractmethod
+
+class Payment(ABC):
+    @abstractmethod
+    def pay(self,amount):
+        pass
+class Discount(ABC):
+    @abstractmethod
+    def apply(self,amount):
+        pass
+
+class Logger(ABC):
+    def log(self,message):
+        pass
+
+class Upi(Payment):
+    def pay(self,amount):
+        self.type="upi"
+        print(f"The payment of {amount} was made through UPI")
+
+class Card(Payment):
+    def pay(self,amount):
+        self.type='card'
+        print(f"The amount {amount} was paid using card")
+
+class PremiumCustomer(Discount):
+    def apply(self,amount):
+        return amount*0.9
+class FestivalOffer(Discount):
+    def apply(self,amount):
+        return amount*0.8
+    
+class PaymentLogger(Logger):
+    def log(self,type,amount):
+        with open("shoppinglog.txt",'a') as f:
+            f.write(f"The amount {amount} was paid using {type}")
+            
+
+class Checkout:
+    def __init__(self,payment:Payment,discount:Discount,logger:Logger):
+        self.payment=payment
+        self.discount=discount
+        self.logger=logger
+    
+    def process(me,amount):
+        me.payment.pay(amount)
+        amountpaid=me.discount.apply(amount)
+        print(amountpaid)
+        me.logger.log(me.payment.type,amountpaid)
+        
+checkout=Checkout(payment=Upi(),discount=FestivalOffer(),logger=PaymentLogger())
+checkout.process(1000)
+
+
+
+
+
+# CLI-Based User Management System  
+
+# Objective 
+
+# Build a CLI-based User Management System using Python that: 
+
+# Stores user data in a JSON file 
+
+# Performs core user operations (CRUD-like) 
+
+# Implements logging for all system activities 
+
+# Follows clean code structure and error handling practices 
+
+# Project Structure 
+
+# user_management/ 
+# │── main.py 
+# │── utils.py 
+# │── storage.py 
+# │── logger.py 
+# │── users.json 
+# │── logs.txt 
+ 
+
+# Data Storage (users.json) 
+
+# { 
+#  "users": [] 
+# } 

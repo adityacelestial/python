@@ -1,6 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends, HTTPException
 from routes import auth_routes,loan_routes,admin_routes
 from services.analytics import analysis
+from security import get_current_user
 app=FastAPI()
 
 app.include_router(router=auth_routes.route,prefix="/auth")
@@ -14,9 +15,10 @@ def homepage():
 def health_res():
     return {"message":"The Backend is up and running succesfully"}
 
-@app.get("/analytics/summary/{user_id}")
-def summary(user_id):
-    
+@app.get("/analytics/summary/{user_id}", dependencies=[Depends(get_current_user)])
+def summary(user_id: int, current_user: dict = Depends(get_current_user)):
+    if user_id != current_user.get("user_id"):
+        raise HTTPException(status_code=403, detail="Access denied")
     result=analysis(user_id)
     return result
     

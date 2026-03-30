@@ -1,5 +1,6 @@
 from database.models import session
 from database.models import User
+from security import create_access_token
 class UserService():
     
     def __init__(self,session):
@@ -25,6 +26,8 @@ class UserService():
         print(result.id)
         print(result.username)
         if result is not None:
-            return {"message":"Login successful","username":f"{result.username}","role":f"{result.role}"}
+            token_data = {"sub": result.username, "user_id": result.id, "role": str(result.role)}
+            access_token = create_access_token(token_data)
+            return {"message":"Login successful","username":f"{result.username}","role":f"{result.role.value}", "access_token": access_token, "token_type": "bearer"}
         else:
             return {"message":"invalid credentials"}

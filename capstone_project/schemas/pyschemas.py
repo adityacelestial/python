@@ -1,5 +1,6 @@
 from pydantic import BaseModel,Field,EmailStr,validator
 from datetime import datetime
+from typing import Optional
 from database.enums import Purpose,EmploymentStatus,Status
 class UserCreate(BaseModel):
     username:str=Field(...,min_length=3,max_length=50)
@@ -49,9 +50,8 @@ class LoanResponse(BaseModel):
     status:str
     admin_remarks:str|None=None
     reviewed_by:str|None=None
-    reviewed_at:datetime
+    reviewed_at:Optional[datetime]=None
     applied_at:datetime
-    updated_at:datetime
     
     model_config={
         "from_attributes":True

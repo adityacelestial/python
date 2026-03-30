@@ -8,7 +8,7 @@ class SQLAlchemyRepository:
         self.db = db
 
     # USER METHODS
-    def create_user(self, username: str):
+    def create(self, username: str):
         user = User(username=username)
         self.db.add(user)
         self.db.commit()
@@ -21,14 +21,13 @@ class SQLAlchemyRepository:
     def get_all_users(self):
         return self.db.query(User).all()
 
-    def delete_user(self, username: str):
+    def delete(self, username: str):
         user = self.get_user(username)
         if user:
             self.db.delete(user)
             self.db.commit()
 
-    # TASK METHODS
-    def create_task(self, task_data: dict):
+    def create(self, task_data: dict):
         task = Task(**task_data)
         self.db.add(task)
         self.db.commit()
@@ -38,7 +37,7 @@ class SQLAlchemyRepository:
     def get_task(self, task_id: int):
         return self.db.query(Task).filter(Task.id == task_id).first()
 
-    def get_all_tasks(self):
+    def get_all(self):
         return self.db.query(Task).all()
 
     def update_task(self, task_id: int, update_data: dict):

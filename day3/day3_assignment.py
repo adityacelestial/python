@@ -128,7 +128,6 @@ compute_squares(100000)
 
 from functools import wraps
 import random
-
 def retry(max_attempts):
     def decorator(func):
         @wraps(func)
@@ -150,7 +149,6 @@ def retry(max_attempts):
 random.seed(42) # For reproducible output
 @retry(max_attempts=5)
 def fetch_data():
-    """Simulates a flaky API call."""
     if random.choice([True, False]):
         raise ConnectionError("Server unreachable")
     return {"status": "ok", "data": [1, 2, 3]}

@@ -59,3 +59,7 @@ class LoanService():
             return loan
         except Exception as e:
             return f"There problem in patching {e}"
+    
+    def get_loans_userid(self,user_id):
+        loans_user=self.session.query(Loan).filter_by(user_id=user_id).all()
+        return loans_user

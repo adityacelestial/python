@@ -96,6 +96,22 @@ Each word length ≤ 100
 
 Time Complexity: O(n * k log k) 
 """
+from collections import defaultdict
+
+def groupAnagrams(words):
+    groups = defaultdict(list)
+
+    for word in words:
+        key = ''.join(sorted(word)) 
+        groups[key].append(word)
+
+    return list(groups.values())
+
+
+words = ["eat","tea","tan","ate","nat","bat"]
+print(groupAnagrams(words))
+
+
     
     
     
@@ -170,17 +186,17 @@ import re
 wordfreq={}
 
     
-with open('sampletext.txt','r') as f:
-    for i in f.readlines():
-        words=i.split(" ")
-        for word in words:
-            word=word.replace("\n","")
-            if word in wordfreq:
-                wordfreq[word]+=1
-            else:
-                wordfreq[word]=1       
+# with open('sampletext.txt','r') as f:
+#     for i in f.readlines():
+#         words=i.split(" ")
+#         for word in words:
+#             word=word.replace("\n","")
+#             if word in wordfreq:
+#                 wordfreq[word]+=1
+#             else:
+#                 wordfreq[word]=1       
 
-print(wordfreq)
+# print(wordfreq)
 
 
 # JSON Validation 
