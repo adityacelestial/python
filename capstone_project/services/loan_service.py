@@ -21,9 +21,16 @@ class LoanService():
         except Exception as e:
             self.session.rollback()
     
-    def view_my_loans(self,user_id):
+    def view_my_loans(self,user_id,status:str=None,limit:int=None,page:int=None):
         
-        loans=self.session.query(Loan).filter_by(user_id=user_id).all()
+        query=self.session.query(Loan).filter_by(user_id=user_id)
+        if status:
+            query=query.filter_by(status=status)
+        if limit is not None:
+            query=query.limit(limit)
+        if page is not None:
+            query=query.offset(page * limit if limit else 0)
+        loans=query.all()
         return loans
         
     def get_my_loan(self,user_id,loan_id):
@@ -31,10 +38,26 @@ class LoanService():
         loans=self.session.query(Loan).filter_by(user_id=user_id,id=loan_id).first()
         
         return loans
-    def get_all_loans(self):
-        
-        loans=self.session.query(Loan).all()
-        
+    def get_all_loans(self,status:str=None,limit:int=None,page:int=None,sorted_by:str=None,order_by:str=None,user_id:int=None,purpose:str=None,employment_status:str=None):
+        query=self.session.query(Loan)
+        if status:
+            query=query.filter_by(status=status)
+        if user_id is not None:
+            query=query.filter_by(user_id=user_id)
+        if purpose:
+            query=query.filter_by(purpose=purpose)
+        if employment_status:
+            query=query.filter_by(employment_status=employment_status)
+        if limit is not None:
+            query=query.limit(limit)
+        if page is not None:
+            query=query.offset(page * limit if limit else 0)
+        if sorted_by:
+            if order_by == "asc":
+                query=query.order_by(getattr(Loan, sorted_by).asc())
+            else:
+                query=query.order_by(getattr(Loan, sorted_by).desc())
+        loans=query.all()
         return loans       
     def get_loan_by_id(self,loan_id):
         output=self.session.query(Loan).filter_by(id=loan_id).first()

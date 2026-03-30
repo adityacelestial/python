@@ -7,6 +7,8 @@ from security import get_current_user
 
 route=APIRouter()
 
+
+
 @route.post("/", dependencies=[Depends(get_current_user)])
 def add_loan_application(loan:LoanCreate, current_user: dict = Depends(get_current_user)):
     loandict=loan.model_dump()
@@ -30,4 +32,3 @@ def get_my_loan(user_id: int, loan_id: int, current_user: dict = Depends(get_cur
     loanserve=LoanService(session)
     result=loanserve.get_my_loan(user_id,loan_id)
     return result
-

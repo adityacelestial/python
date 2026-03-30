@@ -14,9 +14,9 @@ def require_admin(current_user: dict = Depends(get_current_user)):
     return current_user
 
 @route.get("/loans",response_model=List[LoanResponse], dependencies=[Depends(require_admin)])
-def get_all_loans():
+def get_all_loans(status:str=None,limit:int=None,page:int=None,sorted_by:str=None,order_by:str=None,user_id:int=None,purpose:str=None,employment_status:str=None):
     loanserv=LoanService(session)
-    result=loanserv.get_all_loans()
+    result=loanserv.get_all_loans(status,limit,page,sorted_by,order_by,user_id,purpose,employment_status)
     return result
 
 @route.get("/loans/{loan_id}",response_model=LoanResponse, dependencies=[Depends(require_admin)])
