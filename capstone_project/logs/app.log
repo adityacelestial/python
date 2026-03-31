@@ -304,3 +304,7 @@
 2026-03-31 10:41:46,975 - INFO - POST /loan/ | 422 | 4ms
 2026-03-31 10:42:15,962 - INFO - POST /loan | 307 | 0ms
 2026-03-31 10:42:15,971 - INFO - POST /loan/ | 422 | 4ms
+2026-03-31 12:11:08,580 - INFO - POST /auth/register | 201 | 96ms
+2026-03-31 12:17:41,682 - INFO - POST /auth/register | 409 | 10ms
+2026-03-31 12:18:14,628 - INFO - POST /auth/register | 409 | 9ms
+2026-03-31 12:28:46,353 - INFO - POST /auth/login | 401 | 11ms

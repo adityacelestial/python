@@ -26,3 +26,7 @@
 2026-03-30 18:42:08 - INFO - logging_middleware - GET /users | 200 | 10ms
 2026-03-30 18:42:21 - INFO - user_service - User ID 3 deleted
 2026-03-30 18:42:21 - INFO - logging_middleware - DELETE /users/3 | 200 | 27ms
+2026-03-31 12:39:54 - INFO - main - Health check called
+2026-03-31 12:39:54 - INFO - logging_middleware - GET / | 200 | 23ms
+2026-03-31 12:39:56 - INFO - logging_middleware - GET /docs | 200 | 1ms
+2026-03-31 12:39:56 - INFO - logging_middleware - GET /openapi.json | 200 | 84ms

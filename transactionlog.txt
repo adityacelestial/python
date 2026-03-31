@@ -1,3 +1,0 @@
-Deposit:500 Balence:1500 Timestamp :2026-03-27 18:27:14.060601
-withdraw:200 Balence:1300 Timestamp :2026-03-27 18:27:14.061937
-Balence_check  Balence1300 Timestamp: 2026-03-27 18:27:14.065552
