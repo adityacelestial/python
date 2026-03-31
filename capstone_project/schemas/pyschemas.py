@@ -60,5 +60,17 @@ class LoanResponse(BaseModel):
 class LoanReview(BaseModel):
     status:Status
     admin_remarks:str
+
+    @validator('status')
+    def status_not_pending(cls, v):
+        if v == Status.pending:
+            raise ValueError('status must be approved or rejected')
+        return v
+
+    @validator('admin_remarks')
+    def remarks_length(cls, v):
+        if not v or len(v.strip()) < 5 or len(v) > 500:
+            raise ValueError('admin_remarks must be between 5 and 500 chars')
+        return v.strip()
     
     

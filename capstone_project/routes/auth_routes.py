@@ -8,7 +8,7 @@ route=APIRouter()
 def userhome():
     return "This is home user"
 
-@route.post("/register",response_model=UserResponse)
+@route.post("/register", response_model=UserResponse, status_code=201)
 def registeruser(user:UserCreate):
     userdict=user.model_dump()
     
