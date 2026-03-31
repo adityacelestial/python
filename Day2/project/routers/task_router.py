@@ -1,37 +1,38 @@
 from fastapi import APIRouter, Depends, BackgroundTasks
-from sqlalchemy.orm import Session
-from repositories.sqlalchemy_repository import SQLAlchemyRepository
+from datetime import datetime
+
+from repositories.json_repository import JSONRepository
 from services.task_service import TaskService
 from models.schemas import TaskCreate, TaskUpdate
-from database import get_db
-from datetime import datetime
 
 router = APIRouter()
 
 
-# ✅ Background task function
+
 def log_notification(title: str, owner: str):
     with open("notifications.log", "a") as f:
-        f.write(f"[{datetime.utcnow()}] Task '{title}' created by {owner} — notification sent\n")
+        f.write(f"[{datetime.utcnow().isoformat()}] "
+                f"Task '{title}' created by {owner} — notification sent\n")
 
 
-def get_service(db: Session = Depends(get_db)):
-    repo = SQLAlchemyRepository(db)
+from config import DATA_PATH
+
+
+def get_service():
+    repo = JSONRepository(f"{DATA_PATH}/tasks.json", "tasks")
     return TaskService(repo)
 
 
 @router.post("/")
-def create(
+def create_task(
     task: TaskCreate,
     background_tasks: BackgroundTasks,
     service: TaskService = Depends(get_service)
 ):
     new_task = service.create(task, owner="alice")
-    background_tasks.add_task(
-        log_notification,
-        task.title,
-        "alice"
-    )
+
+    # background process
+    background_tasks.add_task(log_notification, task.title, "alice")
 
     return new_task
 
@@ -42,7 +43,8 @@ def get_tasks(
     priority: str = None,
     service: TaskService = Depends(get_service)
 ):
-    return service.get_all({"status": status, "priority": priority})
+    filters = {"status": status, "priority": priority}
+    return service.get_all(filters)
 
 
 @router.get("/{task_id}")
@@ -51,11 +53,15 @@ def get_task(task_id: int, service: TaskService = Depends(get_service)):
 
 
 @router.put("/{task_id}")
-def update(task_id: int, data: TaskUpdate, service: TaskService = Depends(get_service)):
+def update_task(
+    task_id: int,
+    data: TaskUpdate,
+    service: TaskService = Depends(get_service)
+):
     return service.update(task_id, data.dict(exclude_unset=True))
 
 
 @router.delete("/{task_id}")
-def delete(task_id: int, service: TaskService = Depends(get_service)):
+def delete_task(task_id: int, service: TaskService = Depends(get_service)):
     service.delete(task_id)
     return {"message": "Deleted"}

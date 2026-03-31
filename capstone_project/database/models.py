@@ -84,4 +84,9 @@ class Loan(Base):
 
     def __repr__(self):
         return f"<Loan id={self.id} user_id={self.user_id} status={self.status}>"
+
+
+# create tables if missing (for test-run paths where migrations are not applied yet)
+Base.metadata.create_all(engine)
+
         

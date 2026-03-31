@@ -8,6 +8,7 @@ class UserCreate(BaseModel):
     password:str=Field(...,min_length=8)
     phone:str=Field(...,pattern=r'^\d{10,15}$')
     monthly_income:int=Field(...,ge=0)
+    role:str = Field('user')
     
     @validator('email')
     def validate_email(cls,v):

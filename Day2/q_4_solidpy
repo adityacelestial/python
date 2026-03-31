@@ -1,0 +1,67 @@
+# section -2 SOLID principles
+
+
+# Q4. SRP — Separate Validation, Storage, and Notification 
+
+# Topics: SRP 
+
+# Problem Statement: 
+
+# You are given a monolithic UserService class that validates user data,
+# saves to a JSON file, and sends a welcome message — all in one method.
+# Refactor it into three SRP-compliant classes: UserValidator, UserStorage, and UserNotifier.
+# Write an orchestrator function that uses all three. 
+
+# Input: 
+
+# data = {"username": "alice", "email": "alice@mail.com"} 
+
+# register_user(data) 
+
+# Output: 
+
+# Validation passed 
+
+# User saved to users.json 
+
+# Welcome email sent to alice@mail.com 
+
+# Constraints: 
+
+# Each class must have exactly one reason to change 
+
+# UserValidator raises ValueError on invalid data 
+
+# UserStorage reads/writes JSON 
+
+# UserNotifier prints the notification (simulated) 
+import json
+class UserValidation:
+    def __init__(self,dict):
+        self.dict=dict
+        if(self.dict['username'].isalpha()):
+            print("VAlidationpassed")
+
+class UserStorage:
+    def __init__(self,dict):
+        self.dict=dict
+        with open("user.json",'a') as file:
+            json.dump(self.dict,file,indent=4)
+        print("File stored in user.json")
+
+class UserNotifier:
+    def __init__(self,dict):
+        self.dict=dict
+        print(f"Email sent to {self.dict['email']}")
+        
+class register_user:
+    def __init__(self,dict):
+        validation=UserValidation(dict)
+        storage=UserStorage(dict)
+        notification=UserNotifier(dict)     
+    
+data = {"username": "alice", "email": "alice@mail.com"} 
+
+register_user(data) 
+    
+    

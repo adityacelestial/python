@@ -8,6 +8,7 @@ from database.models import session, User, engine, verify_connection
 from database.enums import UserRole
 from config import Settings
 from sqlalchemy.orm import Session
+from sqlalchemy import text
 
 settings = Settings()
 
@@ -96,12 +97,10 @@ def startup_event():
     # Ensure column exists for credit_score in Loan table (post-migration compatibility)
     from database.models import engine
     with engine.connect() as conn:
-        conn.execute(
-            """
+        conn.execute(text("""
             ALTER TABLE loan
             ADD COLUMN IF NOT EXISTS credit_score INTEGER
-            """
-        )
+        """))
         conn.commit()
 
     admin = session.query(User).filter_by(username=settings.ADMIN_USERNAME).first()

@@ -1,15 +1,16 @@
 import json
 import os
 from datetime import datetime
-from .base_repository import BaseRepository
 
-class JSONRepository(BaseRepository):
-    def __init__(self, file_path, root_key):
+
+class JSONRepository:
+    def __init__(self, file_path: str, root_key: str):
         self.file_path = file_path
         self.root_key = root_key
         self._ensure_file()
 
     def _ensure_file(self):
+        """Ensure the JSON file exists; if not, create it."""
         if not os.path.exists(self.file_path):
             with open(self.file_path, "w") as f:
                 json.dump({self.root_key: []}, f)
@@ -20,29 +21,45 @@ class JSONRepository(BaseRepository):
 
     def _write(self, data):
         with open(self.file_path, "w") as f:
-            json.dump(data, f, indent=4, default=str)
+            json.dump(data, f, indent=4)
 
-    def get_all(self):
-        return self._read()[self.root_key]
+    def get_all(self, filters=None):
+        items = self._read()[self.root_key]
+        if not filters:
+            return items
+
+        filtered = []
+        for item in items:
+            match = True
+            for k, v in filters.items():
+                if v is not None and item.get(k) != v:
+                    match = False
+                    break
+            if match:
+                filtered.append(item)
+
+        return filtered
 
     def get_by_id(self, item_id):
-        items = self.get_all()
-        for item in items:
-            if item["id"] == item_id:
-                return item
-        return None
+        items = self._read()[self.root_key]
+        return next((i for i in items if i["id"] == item_id), None)
 
     def create(self, data):
         db = self._read()
         items = db[self.root_key]
 
-        data["id"] = len(items) + 1
-        data["created_at"] = datetime.utcnow()
-        data["updated_at"] = datetime.utcnow()
+        next_id = max([i["id"] for i in items], default=0) + 1
 
-        items.append(data)
+        new_item = {
+            **data,
+            "id": next_id,
+            "created_at": datetime.utcnow().isoformat(),
+            "updated_at": datetime.utcnow().isoformat()
+        }
+
+        items.append(new_item)
         self._write(db)
-        return data
+        return new_item
 
     def update(self, item_id, new_data):
         db = self._read()
@@ -51,9 +68,10 @@ class JSONRepository(BaseRepository):
         for item in items:
             if item["id"] == item_id:
                 item.update(new_data)
-                item["updated_at"] = datetime.utcnow()
+                item["updated_at"] = datetime.utcnow().isoformat()
                 self._write(db)
                 return item
+
         return None
 
     def delete(self, item_id):

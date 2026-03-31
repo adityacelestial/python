@@ -1,7 +1,8 @@
 import functools
 import time
-from fastapi import Depends, HTTPException
+from fastapi import Depends
 from security import get_current_user
+from errors.Errors import ForbiddenError
 
 
 def timer(func):
@@ -39,6 +40,6 @@ def require_role(role: str):
     def dependency(current_user: dict = Depends(get_current_user)):
         user_role = current_user.get("role")
         if user_role != role:
-            raise HTTPException(status_code=403, detail="Forbidden: insufficient role")
+            raise ForbiddenError("Forbidden: insufficient role")
         return current_user
     return dependency

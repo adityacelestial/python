@@ -1,0 +1,28 @@
+2026-03-20 09:00:01 - INFO - main - Starting TaskManagementAPI v1.0.0
+2026-03-20 09:00:02 - INFO - json_repository - Created data file: data/users.json
+2026-03-20 09:00:02 - INFO - json_repository - Created data file: data/tasks.json
+2026-03-20 09:01:10 - INFO - user_service - User 'alice' registered
+2026-03-20 09:01:45 - INFO - user_service - User 'bob' registered
+2026-03-20 09:02:00 - INFO - user_service - User 'alice' logged in
+2026-03-20 09:02:30 - INFO - task_router - POST /tasks | 201 | 12ms
+2026-03-20 09:02:31 - INFO - task_service - Task 'Write Q2 Report' created with id=1
+2026-03-20 09:03:05 - INFO - task_router - POST /tasks | 201 | 10ms
+2026-03-20 09:03:06 - INFO - task_service - Task 'Set up CI pipeline' created with id=2
+2026-03-20 09:03:40 - INFO - task_router - GET /tasks | 200 | 5ms
+2026-03-20 09:04:00 - INFO - task_router - GET /tasks/1 | 200 | 4ms
+2026-03-20 09:04:20 - INFO - task_router - PATCH /tasks/2 | 200 | 8ms
+2026-03-20 09:04:21 - INFO - task_service - Task ID 2 updated
+2026-03-20 09:05:00 - WARNING - user_service - Duplicate username: 'alice'
+2026-03-20 09:05:15 - WARNING - user_service - Failed login attempt for username: 'charlie'
+2026-03-20 09:05:30 - ERROR - task_service - Task ID 999 not found
+2026-03-20 09:06:00 - INFO - task_router - DELETE /tasks/3 | 200 | 6ms
+2026-03-20 09:06:01 - INFO - task_service - Task ID 3 deleted
+2026-03-30 18:38:10 - INFO - logging_middleware - GET /docs | 200 | 1ms
+2026-03-30 18:38:11 - INFO - logging_middleware - GET /openapi.json | 200 | 203ms
+2026-03-30 18:38:30 - INFO - user_service - User 'aditya' registered
+2026-03-30 18:38:30 - INFO - logging_middleware - POST /users/register | 201 | 60ms
+2026-03-30 18:41:58 - INFO - user_service - User 'aditya' logged in
+2026-03-30 18:41:58 - INFO - logging_middleware - POST /users/login | 200 | 17ms
+2026-03-30 18:42:08 - INFO - logging_middleware - GET /users | 200 | 10ms
+2026-03-30 18:42:21 - INFO - user_service - User ID 3 deleted
+2026-03-30 18:42:21 - INFO - logging_middleware - DELETE /users/3 | 200 | 27ms
